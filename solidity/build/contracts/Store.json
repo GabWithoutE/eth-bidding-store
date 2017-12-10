@@ -1,0 +1,69 @@
+{
+  "contractName": "Store",
+  "abi": [],
+  "bytecode": "0x60606040523415600e57600080fd5b603580601b6000396000f3006060604052600080fd00a165627a7a7230582012857f5fefc3a0aedbfb34fef890f90d951be45df4542635f605d6a93bb98bf10029",
+  "deployedBytecode": "0x6060604052600080fd00a165627a7a7230582012857f5fefc3a0aedbfb34fef890f90d951be45df4542635f605d6a93bb98bf10029",
+  "sourceMap": "26:20:1:-;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "26:20:1:-;;;;;",
+  "source": "pragma solidity ^0.4.17;\n\ncontract Store {\n\t\n}\n",
+  "sourcePath": "/Users/adam/Documents/cs512finalproject/solidity/contracts/Store.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/Users/adam/Documents/cs512finalproject/solidity/contracts/Store.sol",
+      "exportedSymbols": {
+        "Store": [
+          98
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".17"
+          ]
+        },
+        "id": 97,
+        "name": "PragmaDirective",
+        "src": "0:24:1"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            98
+          ],
+          "name": "Store",
+          "nodes": [
+            null
+          ],
+          "scope": 99
+        },
+        "id": 98,
+        "name": "ContractDefinition",
+        "src": "26:20:1"
+      }
+    ],
+    "id": 99,
+    "name": "SourceUnit",
+    "src": "0:47:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2017-12-10T01:02:54.743Z"
+}
