@@ -24,6 +24,8 @@ contract Store is ProductOwner {
 	event CheckoutSuccess(address user, uint256 id, uint256 price);
 	event CheckoutFailed(address user, uint256 id, uint256 price);
 
+	event StartupStore(address sender);
+
 	struct User {
 		address adr;
 		bytes32 email;
@@ -55,6 +57,7 @@ contract Store is ProductOwner {
 	function Store() internal {
 		ownerId = msg.sender;
 		storeName = "The Amazing CS 512 Store";
+		StartupStore(msg.sender);
 	}
 
 	function newProduct(uint256 id, bytes32 name, bytes32 description, uint256 price)
