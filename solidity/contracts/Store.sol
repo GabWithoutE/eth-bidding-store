@@ -8,7 +8,6 @@ contract Store is ProductOwner {
 
 	mapping (address => User) users;
 	mapping (uint256 => Product) products;
-	mapping (address => Product) ownership;
 
 	event BidPlaced(address user, uint256 id, uint256 price);
 	event BidRejected(address user, uint256 id, uint256 price);
