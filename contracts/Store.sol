@@ -106,7 +106,7 @@ contract Store is ProductOwner {
 		User storage user = users[userAddress];
 		Product storage product = products[id];
 
-		if (bidPrice < product.price) {
+		if (user.balance < bidPrice || bidPrice < product.price) {
 			BidRejected(userAddress, id, bidPrice);
 			return false;
 		}
