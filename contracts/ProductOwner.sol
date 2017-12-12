@@ -3,7 +3,7 @@ pragma solidity ^0.4.17;
 contract ProductOwner {
 	address public ownerId;
 
-	function ProductOwner() internal {
+	function ProductOwner() public {
 		ownerId = msg.sender;
 	}
 

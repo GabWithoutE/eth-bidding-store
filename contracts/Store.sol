@@ -8,6 +8,7 @@ contract Store is ProductOwner {
 
 	mapping (address => User) users;
 	mapping (uint256 => Product) products;
+	mapping (bytes32 => Bid) bids;
 
 	event BidPlaced(address user, uint256 id, uint256 price);
 	event BidRejected(address user, uint256 id, uint256 price);
@@ -31,7 +32,7 @@ contract Store is ProductOwner {
 		bytes32 email;
 		bytes32 name;
 		uint256 balance;
-		Bid[] bids;
+		bytes32[] bids;
 	}
 
 	struct Bid {
@@ -46,7 +47,7 @@ contract Store is ProductOwner {
 		bytes32 description;
 		uint256 price;
 		uint256 startingPrice;
-		Bid[] bids;
+		bytes32[] bids;
 	}
 
 	struct Receipt {
@@ -54,7 +55,7 @@ contract Store is ProductOwner {
 		uint256 price;
 	}
 
-	function Store() internal {
+	function Store() public {
 		ownerId = msg.sender;
 		storeName = "The Amazing CS 512 Store";
 		StartupStore(msg.sender);
@@ -62,9 +63,9 @@ contract Store is ProductOwner {
 
 	function newProduct(uint256 id, bytes32 name, bytes32 description, uint256 price)
 						isOwner public returns (bool success) {
-		Bid[] storage emptyBids;
-		var product = Product(id, name, description, price, price, emptyBids);
-		if (isValidProduct(product)) {
+		bytes32[] memory emptyBids;
+		Product memory product = Product(id, name, description, price, price, emptyBids);
+		if (product.price > 0) {
 			products[id] = product;
 			ProductCreated(id);
 			return true;
@@ -87,7 +88,7 @@ contract Store is ProductOwner {
 	function newUser(address _address, bytes32 _email, bytes32 _name, uint256 _balance)
 					isOwner public returns (bool success) {
 		if (_address != address(0)) {
-			Bid[] storage emptyBids;
+			bytes32[] memory emptyBids;
 			User memory user = User({ adr: _address, email: _email,
 									name: _name, balance: _balance,
 									bids: emptyBids
@@ -111,16 +112,27 @@ contract Store is ProductOwner {
 		}
 
 		Bid memory newBid = Bid(id, userAddress, bidPrice);
-		user.bids.push(newBid);
-		product.bids.push(newBid);
+		bytes32 bidId = generateBidId(userAddress, id);
+		user.bids.push(bidId);
+		product.bids.push(bidId);
+		bids[bidId] = newBid;
 		BidPlaced(userAddress, id, bidPrice);
 		return true;
+	}
+
+	function generateBidId(address user, uint256 productId) public returns (bytes32 bidId) {
+		uint256 combined = convert(user) + productId;
+		return keccak256(combined);
+	}
+
+	function convert(address userAddress) public returns (uint256 uAddress256) {
+		return uint256(userAddress);
 	}
 
 	function checkoutProduct(uint256 id, uint256 bidPrice) public returns (bool success) {
 		User storage user = users[msg.sender];
 		if (user.balance >= bidPrice) {
-			var (bidSuccess, bidIndex) = userDidBid(user, id, bidPrice);
+			var (bidSuccess, bidIndex) = userDidBid(user.bids.length, user.adr, id, bidPrice);
 			if (bidSuccess) {
 				user.balance -= bidPrice;
 				delete user.bids[bidIndex];
@@ -134,9 +146,13 @@ contract Store is ProductOwner {
 		return false;
 	}
 
-	function userDidBid(User user, uint256 id, uint256 bidPrice) public pure returns (bool success, uint256 bidIndex) {
-		for (uint256 i = 0; i < user.bids.length; i++) {
-			if (user.bids[i].productId == id && user.bids[i].price == bidPrice) {
+	function userDidBid(uint userBidLength, address userAddress, uint256 id, uint256 bidPrice) public returns (bool success, uint256 bidIndex) {
+		for (uint i = 0; i < userBidLength; i++) {
+			bytes32 bidId = generateBidId(userAddress, id);
+			Bid userBid = bids[bidId];
+			uint256 usersProductId = bids[bidId].productId;
+			uint256 usersBidPrice  = bids[bidId].price;
+			if (usersProductId == id && usersBidPrice == bidPrice) {
 				return (true, i);
 			}
 		}
@@ -150,9 +166,5 @@ contract Store is ProductOwner {
     function getStoreBalance() isOwner constant public returns (uint256 _storeBalance) {
     	return storeBalance;
     }
-
-	function isValidProduct(Product product) public pure returns (bool valid) {
-		return product.price > 0;
-	}
 
 }

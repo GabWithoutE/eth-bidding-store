@@ -222,10 +222,10 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.4.17;\n\nimport \"../ERC20.sol\";\n\ncontract StoreToken is ERC20 {\n\t\n}\n",
-  "sourcePath": "/Users/gabrielchen/final-project/contracts/tokens/StoreToken.sol",
+  "sourcePath": "/Users/adam/Documents/cs512finalproject/contracts/tokens/StoreToken.sol",
   "ast": {
     "attributes": {
-      "absolutePath": "/Users/gabrielchen/final-project/contracts/tokens/StoreToken.sol",
+      "absolutePath": "/Users/adam/Documents/cs512finalproject/contracts/tokens/StoreToken.sol",
       "exportedSymbols": {
         "StoreToken": [
           726
@@ -249,7 +249,7 @@
       {
         "attributes": {
           "SourceUnit": 96,
-          "absolutePath": "/Users/gabrielchen/final-project/contracts/ERC20.sol",
+          "absolutePath": "/Users/adam/Documents/cs512finalproject/contracts/ERC20.sol",
           "file": "../ERC20.sol",
           "scope": 727,
           "symbolAliases": [
@@ -319,5 +319,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-12T01:38:22.268Z"
+  "updatedAt": "2017-12-12T01:44:10.860Z"
 }
