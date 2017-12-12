@@ -222,13 +222,13 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.4.17;\n\nimport \"../ERC20.sol\";\n\ncontract StoreToken is ERC20 {\n\t\n}\n",
-  "sourcePath": "/Users/adam/Documents/cs512finalproject/solidity/contracts/tokens/StoreToken.sol",
+  "sourcePath": "/Users/gabrielchen/final-project/contracts/tokens/StoreToken.sol",
   "ast": {
     "attributes": {
-      "absolutePath": "/Users/adam/Documents/cs512finalproject/solidity/contracts/tokens/StoreToken.sol",
+      "absolutePath": "/Users/gabrielchen/final-project/contracts/tokens/StoreToken.sol",
       "exportedSymbols": {
         "StoreToken": [
-          104
+          726
         ]
       }
     },
@@ -242,24 +242,24 @@
             ".17"
           ]
         },
-        "id": 100,
+        "id": 722,
         "name": "PragmaDirective",
-        "src": "0:24:2"
+        "src": "0:24:4"
       },
       {
         "attributes": {
           "SourceUnit": 96,
-          "absolutePath": "/Users/adam/Documents/cs512finalproject/solidity/contracts/ERC20.sol",
+          "absolutePath": "/Users/gabrielchen/final-project/contracts/ERC20.sol",
           "file": "../ERC20.sol",
-          "scope": 105,
+          "scope": 727,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 101,
+        "id": 723,
         "name": "ImportDirective",
-        "src": "26:22:2"
+        "src": "26:22:4"
       },
       {
         "attributes": {
@@ -270,14 +270,14 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            104,
+            726,
             95
           ],
           "name": "StoreToken",
           "nodes": [
             null
           ],
-          "scope": 105
+          "scope": 727
         },
         "children": [
           {
@@ -294,24 +294,24 @@
                   "referencedDeclaration": 95,
                   "type": "contract ERC20"
                 },
-                "id": 102,
+                "id": 724,
                 "name": "UserDefinedTypeName",
-                "src": "73:5:2"
+                "src": "73:5:4"
               }
             ],
-            "id": 103,
+            "id": 725,
             "name": "InheritanceSpecifier",
-            "src": "73:5:2"
+            "src": "73:5:4"
           }
         ],
-        "id": 104,
+        "id": 726,
         "name": "ContractDefinition",
-        "src": "50:34:2"
+        "src": "50:34:4"
       }
     ],
-    "id": 105,
+    "id": 727,
     "name": "SourceUnit",
-    "src": "0:85:2"
+    "src": "0:85:4"
   },
   "compiler": {
     "name": "solc",
@@ -319,5 +319,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-10T01:02:54.743Z"
+  "updatedAt": "2017-12-12T01:38:22.268Z"
 }

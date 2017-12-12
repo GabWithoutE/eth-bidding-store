@@ -8,8 +8,8 @@ module.exports = {
    },
 	rpc: {
 		host: "localhost",
-		gas: 4712388,
-		port: 8545
+    port: 8545,
+		gas: 4712388
 	}
  }
 };
