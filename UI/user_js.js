@@ -103,7 +103,6 @@ function displayProductsForOwner()
   MyContract.deployed().then(function(instance){
 		console.log(user_eth_address)
 		var store = instance
-		console.log("hi")
 		return store.getBalance({from: user_eth_address}.address)
 	}).then(function (balance){
  		console.log(balance)
@@ -221,6 +220,15 @@ global.endBid = function(button_ele)
 	bid_ended_product_id = parent_id;
 
 	//bid_ended_product_id = button_ele.id;
+
+	MyContract.deployed().then(function(instance){
+		var store = instance;
+		return store.endBid(bid_ended_product_id, {from: user_eth_address}.address)
+	}).then(function(success) {
+		console.log("Ended bid",success)
+	}).catch(function(e){
+		console.log(e)
+	})
 
 
 	document.getElementById(parent_id).innerHTML = "Bid Ended!!!";
