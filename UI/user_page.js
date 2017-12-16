@@ -327,6 +327,17 @@ global.submitBid = function(submit_btn_id)
 
 	var bid_amt = document.getElementById(amt_id ).value;
 	console.log("User:"+user_logged_in.userid+",product_id:"+submit_btn_id+",bid_amount:"+bid_amt);
+
+	MyContract.setProvider(web3Provider.currentProvider);
+
+	MyContract.deployed().then(function(instance){
+		var store = instance;
+		return store.placeBid(submit_btn_id, bid_amt, {from: user_eth_address, gas:3000000})
+	}).then(function(success) {
+		console.log("Submitted bid",success)
+	}).catch(function(e){
+		console.log(e)
+	})
 }
 
 global.logout_user = function()
@@ -7728,14 +7739,14 @@ module.exports={
     "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
   },
   "networks": {
-    "1513424948462": {
+    "1513425297271": {
       "events": {},
       "links": {},
-      "address": "0x1de30d8bacdea089083e7bfc27f83de77385e1e0"
+      "address": "0x96ed8921b4ddeaf1f948435410f965357577807b"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-16T11:49:27.039Z"
+  "updatedAt": "2017-12-16T11:55:19.995Z"
 }
 },{}],3:[function(require,module,exports){
 'use strict';

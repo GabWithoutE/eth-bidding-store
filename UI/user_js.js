@@ -325,6 +325,17 @@ global.submitBid = function(submit_btn_id)
 
 	var bid_amt = document.getElementById(amt_id ).value;
 	console.log("User:"+user_logged_in.userid+",product_id:"+submit_btn_id+",bid_amount:"+bid_amt);
+
+	MyContract.setProvider(web3Provider.currentProvider);
+
+	MyContract.deployed().then(function(instance){
+		var store = instance;
+		return store.placeBid(submit_btn_id, bid_amt, {from: user_eth_address, gas:3000000})
+	}).then(function(success) {
+		console.log("Submitted bid",success)
+	}).catch(function(e){
+		console.log(e)
+	})
 }
 
 global.logout_user = function()
