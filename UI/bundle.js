@@ -36,22 +36,25 @@ global.validate_user = function()
 		var user_id = document.getElementById('uid').value;
 		var password = document.getElementById('pwd').value;
 
-		if( user_id== users[i].userid && password==users[i].pwd)
-		{
-			isValidUser = true;
-			setUserToSession(users[i]);
+		setUserToSession(users[0]);
+		location.href="./user.html";
 
-			/*if(user_id == "owner")
-			{
-
-				location.href="./owner.html";
-			}
-			else
-			{
-				location.href="./user.html";
-			}*/
-			location.href="./user.html";
-		}
+		// if( user_id== users[i].userid && password==users[i].pwd)
+		// {
+		// 	isValidUser = true;
+		// 	setUserToSession(users[i]);
+    //
+		// 	/*if(user_id == "owner")
+		// 	{
+    //
+		// 		location.href="./owner.html";
+		// 	}
+		// 	else
+		// 	{
+		// 		location.href="./user.html";
+		// 	}*/
+		// 	location.href="./user.html";
+		// }
 
 	}
 	if(!isValidUser)
@@ -14161,10 +14164,20 @@ module.exports={
       "events": {},
       "links": {},
       "address": "0xba3aec69447bb864233205826c7ff6ed69ac78b6"
+    },
+    "1513393456377": {
+      "events": {},
+      "links": {},
+      "address": "0xcf4ba61b5863ef64174e1398f449f7288b13e2b1"
+    },
+    "1513394289901": {
+      "events": {},
+      "links": {},
+      "address": "0xc5aadb0de2d724fb958937ba03d4b13ae3794530"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-15T22:59:16.707Z"
+  "updatedAt": "2017-12-16T03:18:16.894Z"
 }
 },{}],3:[function(require,module,exports){
 'use strict';

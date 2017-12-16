@@ -1,12 +1,30 @@
 var Web3 = require('web3'),
 		tContract = require('truffle-contract'),
 		path = require('path'),
-		MyContractJson = require('../build/contracts/Stores.json'),
+		MyContractJson = require('../build/contracts/Store.json'),
 		$ = require('jquery')
 
 const web3Provider = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
 var MyContract = tContract(MyContractJson)
-MyContract.setProvider(web3Provider)
+// console.log(MyContractJson)
+// console.log("Contract")
+// console.log("Contract",MyContract)
+// console.log(MyContract.deployed())
+
+
+
+// function getContractInstance (callback) {
+// 	MyContract.setProvider(web3Provider.currentProvider)
+//
+// 	MyContract.deployed().then(function(instance){
+// 		console.log("Instance")
+// 		console.log("Instance", instance)
+// 	})
+// 	callback();
+// }
+
+
+
 
 //Get these values dynamically
 //Get these values dynamically
@@ -19,7 +37,8 @@ var products;
 	else
 	{
 
-		products = [{"product_id":"001","product_name":"product one","product_desc":"First product","isEnded":"false"},{"product_id":"002","product_name":"product two","product_desc":"Second product","isEnded":"false"},{"product_id":"003","product_name":"product three","product_desc":"Third product","isEnded":"false"}];
+		// products = [{"product_id":"001","product_name":"product one","product_desc":"First product","isEnded":"false"},{"product_id":"002","product_name":"product two","product_desc":"Second product","isEnded":"false"},{"product_id":"003","product_name":"product three","product_desc":"Third product","isEnded":"false"}];
+		products = []
 	}
 	console.log("User products"+products);
 
@@ -30,12 +49,12 @@ document.getElementById('user_name').innerHTML = user_logged_in.userid;
 
 var user_eth_address = user_logged_in.ethAccntAddress
 // console.log("Hello")
-console.log("User Eth Address",user_eth_address)
+// console.log("User Eth Address",user_eth_address)
 
 
 if(user_logged_in.userid=='owner')
 {
-
+	// getContractInstance(displayProductsForOwner);
 	displayProductsForOwner();
 	document.getElementById('addbtn').style.visibility="visible";
 
@@ -50,6 +69,26 @@ else
 
 function displayProductsForOwner()
 {
+	MyContract.setProvider(web3Provider.currentProvider)
+
+	MyContract.deployed().then(function(instance){
+		console.log("Instance")
+		console.log("Instance", instance)
+	})
+	// callback();
+	// var store
+  MyContract.deployed().then(function(instance){
+		console.log(user_eth_address)
+		var store = instance
+		console.log("hi")
+		return store.yo({from: user_eth_address}.address)
+	}).then(function (balance){
+ 		console.log(balance)
+	}).catch(function(e) {
+		console.log("error, didn't return balance")
+		console.log(e)
+	 })
+
 
 	localStorage.removeItem("all_products");
 

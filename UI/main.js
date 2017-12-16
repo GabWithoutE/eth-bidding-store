@@ -7,7 +7,7 @@ var Web3 = require('web3'),
 var web3Provider = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 var MyContract = tContract(MyContractJson)
-MyContract.setProvider(web3Provider)
+MyContract.setProvider(web3Provider.currentProvider)
 
 var ethAccounts = web3Provider.eth.accounts
 
@@ -34,22 +34,25 @@ global.validate_user = function()
 		var user_id = document.getElementById('uid').value;
 		var password = document.getElementById('pwd').value;
 
-		if( user_id== users[i].userid && password==users[i].pwd)
-		{
-			isValidUser = true;
-			setUserToSession(users[i]);
+		setUserToSession(users[0]);
+		location.href="./user.html";
 
-			/*if(user_id == "owner")
-			{
-
-				location.href="./owner.html";
-			}
-			else
-			{
-				location.href="./user.html";
-			}*/
-			location.href="./user.html";
-		}
+		// if( user_id== users[i].userid && password==users[i].pwd)
+		// {
+		// 	isValidUser = true;
+		// 	setUserToSession(users[i]);
+    //
+		// 	/*if(user_id == "owner")
+		// 	{
+    //
+		// 		location.href="./owner.html";
+		// 	}
+		// 	else
+		// 	{
+		// 		location.href="./user.html";
+		// 	}*/
+		// 	location.href="./user.html";
+		// }
 
 	}
 	if(!isValidUser)

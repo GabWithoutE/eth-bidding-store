@@ -159,6 +159,11 @@ contract Store is ProductOwner {
 		return (false, uint256(-1));
 	}
 
+	function yo() constant public returns (bool hello) {
+
+		return true;
+	}
+
 	function getBalance() constant public returns (uint256 _balance) {
 		return users[msg.sender].balance;
     }

@@ -220,7 +220,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 704,
+                                  "referencedDeclaration": 712,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -357,7 +357,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 704,
+                                  "referencedDeclaration": 712,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -816,102 +816,12 @@
     "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
   },
   "networks": {
-    "1": {
+    "1513400253503": {
       "events": {},
       "links": {},
-      "address": "0x8451a8b3d76ca9aea7b508cddfd2be145ecbf31e"
-    },
-    "1513042780210": {
-      "events": {},
-      "links": {},
-      "address": "0xc9eea0206b93357dffa64f6dcf26d0739a9b1a4c"
-    },
-    "1513043824896": {
-      "events": {},
-      "links": {},
-      "address": "0xba6d11c77302677b6f1bad4cf37e2e665ecf311e"
-    },
-    "1513043862184": {
-      "events": {},
-      "links": {},
-      "address": "0xe2c06c54c1df1036361fc837738a29a3d015c6c6"
-    },
-    "1513043903985": {
-      "events": {},
-      "links": {},
-      "address": "0xbe559b4edbcce3bc692322a95f89ffb202687eee"
-    },
-    "1513043975957": {
-      "events": {},
-      "links": {},
-      "address": "0xb0da303780c4af22bb94684c0709e0d5a8c289b1"
-    },
-    "1513044082740": {
-      "events": {},
-      "links": {},
-      "address": "0x9ccac9c12ba648ee14d2bf30833e4231713c4d3f"
-    },
-    "1513044202297": {
-      "events": {},
-      "links": {},
-      "address": "0x7e4c4611664ad931c60792523741c3c79489fbe0"
-    },
-    "1513044770240": {
-      "events": {},
-      "links": {},
-      "address": "0xa54df977faecd5d4ae2c7722f0fda9d80707ed9e"
-    },
-    "1513045125548": {
-      "events": {},
-      "links": {},
-      "address": "0xaeebd2302e090ae4f0dc633e382f2493f601b66d"
-    },
-    "1513045170282": {
-      "events": {},
-      "links": {},
-      "address": "0x582528ce1dd1715c4bf49f809d03f0153a5c7984"
-    },
-    "1513225028530": {
-      "events": {},
-      "links": {},
-      "address": "0x972bd15119eb8c8d0ec14e44ca0ce6bd335f2f5c"
-    },
-    "1513232940405": {
-      "events": {},
-      "links": {},
-      "address": "0xd1907b550c8ead3e928cbe49792b445b6f73ad5a"
-    },
-    "1513357771356": {
-      "events": {},
-      "links": {},
-      "address": "0x882fc31aa22397bd06bf717eb4ee386983098657"
-    },
-    "1513358966317": {
-      "events": {},
-      "links": {},
-      "address": "0x067551a9b461c836401f0a520aeafdc2c7ad0867"
-    },
-    "1513360940211": {
-      "events": {},
-      "links": {},
-      "address": "0x1d46ee7f76428f60e82820a7347f3564f286d98a"
-    },
-    "1513361491557": {
-      "events": {},
-      "links": {},
-      "address": "0x8eb5ebad80bfd20babda3a17e2410eca785b684d"
-    },
-    "1513362650904": {
-      "events": {},
-      "links": {},
-      "address": "0x145f1ed364b294ed725ab63d68610fe4c24f00a7"
-    },
-    "1513378748529": {
-      "events": {},
-      "links": {},
-      "address": "0x49bdae363ab31725c1254a86e9c42b1b5d5914d9"
+      "address": "0x03b2cf0a2452d94bd8f3f9c74f5d271163af318f"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-15T22:59:16.686Z"
+  "updatedAt": "2017-12-16T04:57:41.854Z"
 }
