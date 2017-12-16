@@ -70,6 +70,8 @@ if (user_logged_in == null) {
 }
 
 function createUserAtFirstLoginc() {
+	MyContract.setProvider(web3Provider.currentProvider)
+	
 	MyContract.deployed().then(function(instance){
 		var store = instance;
 		return store.newUser(user_logged_in.userid + "@nono.com",
@@ -223,6 +225,8 @@ global.endBid = function(button_ele)
 	bid_ended_product_id = parent_id;
 
 	//bid_ended_product_id = button_ele.id;
+
+	MyContract.setProvider(web3Provider.currentProvider);
 
 	MyContract.deployed().then(function(instance){
 		var store = instance;

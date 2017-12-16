@@ -194,7 +194,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 629,
+                                  "referencedDeclaration": 627,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -274,7 +274,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 632,
+                              "referencedDeclaration": 630,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -315,7 +315,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 629,
+                                      "referencedDeclaration": 627,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -709,5 +709,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-16T11:55:16.036Z"
+  "updatedAt": "2017-12-16T12:20:10.398Z"
 }

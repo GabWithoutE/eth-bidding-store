@@ -86,7 +86,7 @@ contract Store is ProductOwner {
 	}
 
 	function newUser(bytes32 _email, bytes32 _name, uint256 _balance)
-					isOwner public returns (bool success) {
+					public returns (bool success) {
 		if (users[msg.sender].adr != address(0)) {
 			User memory user = User({ adr: msg.sender, email: _email,
 									name: _name, balance: _balance

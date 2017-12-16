@@ -17,4 +17,4 @@ let byteCode = compiledCode.contracts['Store.sol:Store'].bytecode
 let deployedContract = StoreContract.new({data: byteCode, from: web3.eth.accounts[0], gas: 4700000})
 let address = deployedContract.address
 console.log("Store Contract Address: %s" %address)
-let contractInstance = StoreContract.at(0x96ed8921b4ddeaf1f948435410f965357577807b)
+let contractInstance = StoreContract.at(0x32b24383ca3f03b5a0a650c6c87b6ac100958376)
