@@ -37,8 +37,8 @@ var products;
 	else
 	{
 
-		// products = [{"product_id":"001","product_name":"product one","product_desc":"First product","isEnded":"false"},{"product_id":"002","product_name":"product two","product_desc":"Second product","isEnded":"false"},{"product_id":"003","product_name":"product three","product_desc":"Third product","isEnded":"false"}];
-		products = []
+		products = [];
+		// products = []
 	}
 	console.log("User products"+products);
 
@@ -56,13 +56,36 @@ if(user_logged_in.userid=='owner')
 {
 	// getContractInstance(displayProductsForOwner);
 	displayProductsForOwner();
+	createUserAtFirstLoginc()
 	document.getElementById('addbtn').style.visibility="visible";
 
 }
 else
 {
-
+	createUserAtFirstLoginc()
 	displayProductsForOthers();
+}
+
+function createUserAtFirstLoginc() {
+	MyContract.deployed().then(function(instance){
+		var store = instance;
+		return store.newUser(user_logged_in.userid + "@nono.com",
+										user_logged_in.userid, 1000,
+										{from: user_eth_address}.address)
+	}).then(function(success){
+		if (success) {
+			console.log("CREATION SUCCESS!")
+		} else {
+			console.log("User already exists, or it messed up... woops")
+		}
+	}).catch(function(e){
+		console.log(e)
+	})
+
+}
+
+function createUser() {
+
 }
 
 
@@ -81,7 +104,7 @@ function displayProductsForOwner()
 		console.log(user_eth_address)
 		var store = instance
 		console.log("hi")
-		return store.yo({from: user_eth_address}.address)
+		return store.getBalance({from: user_eth_address}.address)
 	}).then(function (balance){
  		console.log(balance)
 	}).catch(function(e) {
@@ -92,7 +115,7 @@ function displayProductsForOwner()
 
 	localStorage.removeItem("all_products");
 
-	if(products.length>0)
+	if(products.length>=0)
 	{
 		var tab = document.getElementById("products_table");
 		var header = tab.createTHead();
@@ -135,7 +158,7 @@ function displayProductsForOwner()
 
 }
 
-function add_product()
+global.add_product =  function()
 {
 	var productName = window.prompt("Product Name");
 	var prodDesc = window.prompt("Product Description");
@@ -144,6 +167,19 @@ function add_product()
 	newProduct.product_name = productName;
 	newProduct.product_desc = prodDesc;
         newProduct.isEnded="false";
+	// console.log("HIIIII")
+
+	console.log(web3Provider.eth.getBalance(user_eth_address))
+
+	MyContract.deployed().then(function(instance){
+		var store = instance;
+		return store.newProduct(parseInt(newProduct.product_id),
+						newProduct.product_name, newProduct.product_desc, 10, {from: user_eth_address, gas:3000000})
+	}).then(function(success) {
+		console.log("Success?...",success)
+	}).catch(function(e){
+		console.log(e)
+	})
 
 	products.push(newProduct);
 	console.log(newProduct);
@@ -168,9 +204,8 @@ function add_product()
 
 }
 
-function endBid(button_ele)
+global.endBid = function(button_ele)
 {
-
 	console.log(button_ele.parentNode.id);
 
 	parent_id = button_ele.parentNode.id;
@@ -259,7 +294,7 @@ function displayProductsForOthers()
 }
 
 
-function submitBid(submit_btn_id)
+global.submitBid = function(submit_btn_id)
 {
 
 	var amt_id = submit_btn_id+"_bidamt";
@@ -268,7 +303,7 @@ function submitBid(submit_btn_id)
 	console.log("User:"+user_logged_in.userid+",product_id:"+submit_btn_id+",bid_amount:"+bid_amt);
 }
 
-function logout_user()
+global.logout_user = function()
 {
 	location.href="./home.html";
 }

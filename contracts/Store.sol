@@ -85,19 +85,19 @@ contract Store is ProductOwner {
 		return false;
 	}
 
-	function newUser(address _address, bytes32 _email, bytes32 _name, uint256 _balance)
+	function newUser(bytes32 _email, bytes32 _name, uint256 _balance)
 					isOwner public returns (bool success) {
-		if (_address != address(0)) {
+		if (users[msg.sender].adr != address(0)) {
 			bytes32[] memory emptyBids;
-			User memory user = User({ adr: _address, email: _email,
+			User memory user = User({ adr: msg.sender, email: _email,
 									name: _name, balance: _balance,
 									bids: emptyBids
 								});
-			users[_address] = user;
-			UserCreated(_address);
+			users[msg.sender] = user;
+			/* UserCreated(_address); */
 			return true;
 		}
-		UserCreatedFailed(_address);
+		/* UserCreatedFailed(_address); */
 		return false;
 	}
 
@@ -159,8 +159,11 @@ contract Store is ProductOwner {
 		return (false, uint256(-1));
 	}
 
-	function yo() constant public returns (bool hello) {
+	function userExists () public returns (bool exists){
+		return users[msg.sender].adr != msg.sender;
+	}
 
+	function yo() constant public returns (bool hello) {
 		return true;
 	}
 
