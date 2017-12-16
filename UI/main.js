@@ -62,10 +62,6 @@ global.validate_user = function()
 
 }
 
-global.sosososo = function(){
-	console.log("hello")
-}
-
 function setUserToSession(user)
 {
 
