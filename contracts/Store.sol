@@ -8,7 +8,6 @@ contract Store is ProductOwner {
 
 	mapping (address => User) users;
 	mapping (uint256 => Product) products;
-	mapping (bytes32 => Bid) bids;
 
 	event BidPlaced(address user, uint256 id, uint256 price);
 	event BidRejected(address user, uint256 id, uint256 price);
@@ -32,7 +31,7 @@ contract Store is ProductOwner {
 		bytes32 email;
 		bytes32 name;
 		uint256 balance;
-		bytes32[] bids;
+		mapping(bytes32 => Bid) bids;
 	}
 
 	struct Bid {
@@ -47,7 +46,9 @@ contract Store is ProductOwner {
 		bytes32 description;
 		uint256 price;
 		uint256 startingPrice;
-		bytes32[] bids;
+		address lister;
+		Bid topBid;
+		mapping(bytes32 => Bid) bids;
 	}
 
 	struct Receipt {
@@ -62,9 +63,8 @@ contract Store is ProductOwner {
 	}
 
 	function newProduct(uint256 id, bytes32 name, bytes32 description, uint256 price)
-						isOwner public returns (bool success) {
-		bytes32[] memory emptyBids;
-		Product memory product = Product(id, name, description, price, price, emptyBids);
+						public returns (bool success) {
+		Product memory product = Product(id, name, description, price, price, msg.sender, Bid(0, 0, 0));
 		if (product.price > 0) {
 			products[id] = product;
 			ProductCreated(id);
@@ -74,7 +74,7 @@ contract Store is ProductOwner {
 		return false;
 	}
 
-	function deleteProduct(uint256 id) isOwner public returns (bool success) {
+	function deleteProduct(uint256 id) public returns (bool success) {
 		Product storage product = products[id];
 		if (product.id == id) {
 			delete products[id];
@@ -86,12 +86,10 @@ contract Store is ProductOwner {
 	}
 
 	function newUser(address _address, bytes32 _email, bytes32 _name, uint256 _balance)
-					isOwner public returns (bool success) {
-		if (_address != address(0)) {
-			bytes32[] memory emptyBids;
+					public returns (bool success) {
+		if (_address != address(0)) { if (users[msg.sender].email != '0' && users[msg.sender].name != '0')
 			User memory user = User({ adr: _address, email: _email,
-									name: _name, balance: _balance,
-									bids: emptyBids
+									name: _name, balance: _balance
 								});
 			users[_address] = user;
 			UserCreated(_address);
@@ -101,7 +99,7 @@ contract Store is ProductOwner {
 		return false;
 	}
 
-	function placeBid(uint256 id, uint256 bidPrice) public returns (bool success) {
+	function placeBid(uint256 id, uint256 bidPrice) public payable returns (bool success) {
 		address userAddress = msg.sender;
 		User storage user = users[userAddress];
 		Product storage product = products[id];
@@ -113,9 +111,11 @@ contract Store is ProductOwner {
 
 		Bid memory newBid = Bid(id, userAddress, bidPrice);
 		bytes32 bidId = generateBidId(userAddress, id);
-		user.bids.push(bidId);
-		product.bids.push(bidId);
-		bids[bidId] = newBid;
+		user.bids[bidId] = newBid;
+		product.bids[bidId] = newBid;
+		if (bidPrice > product.topBid.price) {
+			product.topBid = newBid;
+		}
 		BidPlaced(userAddress, id, bidPrice);
 		return true;
 	}
@@ -129,36 +129,6 @@ contract Store is ProductOwner {
 		return uint256(userAddress);
 	}
 
-	function checkoutProduct(uint256 id, uint256 bidPrice) public returns (bool success) {
-		User storage user = users[msg.sender];
-		if (user.balance >= bidPrice) {
-			var (bidSuccess, bidIndex) = userDidBid(user.bids.length, user.adr, id, bidPrice);
-			if (bidSuccess) {
-				user.balance -= bidPrice;
-				delete user.bids[bidIndex];
-				delete products[id];
-				storeBalance += bidPrice;
-				CheckoutSuccess(user.adr, id, bidPrice);
-				return true;
-			}
-		}
-		CheckoutFailed(user.adr, id, bidPrice);
-		return false;
-	}
-
-	function userDidBid(uint userBidLength, address userAddress, uint256 id, uint256 bidPrice) public returns (bool success, uint256 bidIndex) {
-		for (uint i = 0; i < userBidLength; i++) {
-			bytes32 bidId = generateBidId(userAddress, id);
-			Bid userBid = bids[bidId];
-			uint256 usersProductId = bids[bidId].productId;
-			uint256 usersBidPrice  = bids[bidId].price;
-			if (usersProductId == id && usersBidPrice == bidPrice) {
-				return (true, i);
-			}
-		}
-		return (false, uint256(-1));
-	}
-
 	function yo() constant public returns (bool hello) {
 
 		return true;
@@ -168,8 +138,20 @@ contract Store is ProductOwner {
 		return users[msg.sender].balance;
     }
 
-    function getStoreBalance() isOwner constant public returns (uint256 _storeBalance) {
+    function getStoreBalance() constant public returns (uint256 _storeBalance) {
     	return storeBalance;
+    }
+
+    function endBid(uint256 productId) public payable {
+    	Bid storage winningBid = products[productId].topBid;
+    	User storage winner = users[winner.adr];
+    	uint256 bidPrice = winningBid.price;
+		if (winner.balance >= bidPrice) {
+			winner.balance -= bidPrice;
+			products[productId].lister.transfer(bidPrice); // payout lister
+			delete winner.bids[generateBidId(winner.adr, productId)];
+			delete products[productId];
+		}
     }
 
 }

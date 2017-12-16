@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const cuid = require('cuid');
 const cors = require('cors');
 
-const storeContract = StoreContract.at(process.env.STORE_CONTRACT_ADDRESS || '0xCc724c8Ebc5785b9D2138C539A99eBd05aadaEa5');
+const storeContract = StoreContract.at(process.env.STORE_CONTRACT_ADDRESS || '0x955586cae4cdd33233b6913a6da2c3c43295aa5e');
 
 // StartupStore specified in Store.sol as event that signals starting store
 const startupStoreAttempt = storeContract.StartupStore();
