@@ -15,6 +15,7 @@
   "dependencies": {
     "ethereumjs-testrpc": "^6.0.3",
     "express-generator": "^4.15.5",
+    "jquery": "^3.2.1",
     "solc": "^0.4.19",
     "solidity-sha3": "^0.4.1",
     "truffle-contract": "^3.0.1",

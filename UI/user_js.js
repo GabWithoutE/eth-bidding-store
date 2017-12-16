@@ -1,5 +1,12 @@
-const Web3 = require('web3')
-const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+var Web3 = require('web3'),
+		tContract = require('truffle-contract'),
+		path = require('path'),
+		MyContractJson = require('../build/contracts/Stores.json'),
+		$ = require('jquery')
+
+const web3Provider = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+var MyContract = tContract(MyContractJson)
+MyContract.setProvider(web3Provider)
 
 //Get these values dynamically
 //Get these values dynamically
@@ -20,6 +27,11 @@ var user_logged_in = JSON.parse(sessionStorage.getItem('loggedUser'));
 sessionStorage.removeItem('loggedUser');
 console.log(user_logged_in );
 document.getElementById('user_name').innerHTML = user_logged_in.userid;
+
+var user_eth_address = user_logged_in.ethAccntAddress
+// console.log("Hello")
+console.log("User Eth Address",user_eth_address)
+
 
 if(user_logged_in.userid=='owner')
 {
