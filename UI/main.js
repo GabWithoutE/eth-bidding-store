@@ -34,9 +34,6 @@ global.validate_user = function()
 		var user_id = document.getElementById('uid').value;
 		var password = document.getElementById('pwd').value;
 
-		setUserToSession(users[0]);
-		location.href="./user.html";
-
 		if( user_id== users[i].userid && password==users[i].pwd)
 		{
 			isValidUser = true;

@@ -36,9 +36,6 @@ global.validate_user = function()
 		var user_id = document.getElementById('uid').value;
 		var password = document.getElementById('pwd').value;
 
-		setUserToSession(users[0]);
-		location.href="./user.html";
-
 		if( user_id== users[i].userid && password==users[i].pwd)
 		{
 			isValidUser = true;
@@ -7472,14 +7469,14 @@ module.exports={
     "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
   },
   "networks": {
-    "1513424370129": {
+    "1513424948462": {
       "events": {},
       "links": {},
-      "address": "0x0613d8da787a0f6e5535c3e0b3653e7e302f2ee2"
+      "address": "0x1de30d8bacdea089083e7bfc27f83de77385e1e0"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-16T11:39:46.479Z"
+  "updatedAt": "2017-12-16T11:49:27.039Z"
 }
 },{}],3:[function(require,module,exports){
 'use strict';
