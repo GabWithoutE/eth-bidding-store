@@ -37,22 +37,21 @@ global.validate_user = function()
 		setUserToSession(users[0]);
 		location.href="./user.html";
 
-		// if( user_id== users[i].userid && password==users[i].pwd)
-		// {
-		// 	isValidUser = true;
-		// 	setUserToSession(users[i]);
-    //
-		// 	/*if(user_id == "owner")
-		// 	{
-    //
-		// 		location.href="./owner.html";
-		// 	}
-		// 	else
-		// 	{
-		// 		location.href="./user.html";
-		// 	}*/
-		// 	location.href="./user.html";
-		// }
+		if( user_id== users[i].userid && password==users[i].pwd)
+		{
+			isValidUser = true;
+			setUserToSession(users[i]);
+    
+			if(user_id == "owner")
+			{
+    
+				location.href="./owner.html";
+			}
+			else
+			{
+				location.href="./user.html";
+			}
+		}
 
 	}
 	if(!isValidUser)

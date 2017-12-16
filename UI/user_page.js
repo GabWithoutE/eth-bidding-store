@@ -46,26 +46,29 @@ var products;
 
 var user_logged_in = JSON.parse(sessionStorage.getItem('loggedUser'));
 sessionStorage.removeItem('loggedUser');
-console.log(user_logged_in );
-document.getElementById('user_name').innerHTML = user_logged_in.userid;
+if (user_logged_in == null) {
+  location.href="./home.html";
+} else {
+	document.getElementById('user_name').innerHTML = user_logged_in.userid;
 
-var user_eth_address = user_logged_in.ethAccntAddress
-// console.log("Hello")
-// console.log("User Eth Address",user_eth_address)
+	var user_eth_address = user_logged_in.ethAccntAddress
+	// console.log("Hello")
+	// console.log("User Eth Address",user_eth_address)
 
 
-if(user_logged_in.userid=='owner')
-{
-	// getContractInstance(displayProductsForOwner);
-	displayProductsForOwner();
-	createUserAtFirstLoginc()
-	document.getElementById('addbtn').style.visibility="visible";
+	if(user_logged_in.userid=='owner')
+	{
+		// getContractInstance(displayProductsForOwner);
+		displayProductsForOwner();
+		createUserAtFirstLoginc()
+		document.getElementById('addbtn').style.visibility="visible";
 
-}
-else
-{
-	createUserAtFirstLoginc()
-	displayProductsForOthers();
+	}
+	else
+	{
+		createUserAtFirstLoginc()
+		displayProductsForOthers();
+	}
 }
 
 function createUserAtFirstLoginc() {
@@ -7725,19 +7728,14 @@ module.exports={
     "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
   },
   "networks": {
-    "1513420932543": {
+    "1513424370129": {
       "events": {},
       "links": {},
-      "address": "0xd682edd65709010cf4317c0daf1c046d3298bf49"
-    },
-    "1513423046020": {
-      "events": {},
-      "links": {},
-      "address": "0x6510870885e437ce8c20be7a447edd18698d69f3"
+      "address": "0x0613d8da787a0f6e5535c3e0b3653e7e302f2ee2"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-16T11:23:01.351Z"
+  "updatedAt": "2017-12-16T11:39:46.479Z"
 }
 },{}],3:[function(require,module,exports){
 'use strict';

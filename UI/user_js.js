@@ -44,26 +44,29 @@ var products;
 
 var user_logged_in = JSON.parse(sessionStorage.getItem('loggedUser'));
 sessionStorage.removeItem('loggedUser');
-console.log(user_logged_in );
-document.getElementById('user_name').innerHTML = user_logged_in.userid;
+if (user_logged_in == null) {
+  location.href="./home.html";
+} else {
+	document.getElementById('user_name').innerHTML = user_logged_in.userid;
 
-var user_eth_address = user_logged_in.ethAccntAddress
-// console.log("Hello")
-// console.log("User Eth Address",user_eth_address)
+	var user_eth_address = user_logged_in.ethAccntAddress
+	// console.log("Hello")
+	// console.log("User Eth Address",user_eth_address)
 
 
-if(user_logged_in.userid=='owner')
-{
-	// getContractInstance(displayProductsForOwner);
-	displayProductsForOwner();
-	createUserAtFirstLoginc()
-	document.getElementById('addbtn').style.visibility="visible";
+	if(user_logged_in.userid=='owner')
+	{
+		// getContractInstance(displayProductsForOwner);
+		displayProductsForOwner();
+		createUserAtFirstLoginc()
+		document.getElementById('addbtn').style.visibility="visible";
 
-}
-else
-{
-	createUserAtFirstLoginc()
-	displayProductsForOthers();
+	}
+	else
+	{
+		createUserAtFirstLoginc()
+		displayProductsForOthers();
+	}
 }
 
 function createUserAtFirstLoginc() {
