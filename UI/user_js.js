@@ -71,7 +71,7 @@ function createUserAtFirstLoginc() {
 		var store = instance;
 		return store.newUser(user_logged_in.userid + "@nono.com",
 										user_logged_in.userid, 1000,
-										{from: user_eth_address}.address)
+										{from: user_eth_address, gas:3000000})
 	}).then(function(success){
 		if (success) {
 			console.log("CREATION SUCCESS!")
@@ -103,7 +103,7 @@ function displayProductsForOwner()
   MyContract.deployed().then(function(instance){
 		console.log(user_eth_address)
 		var store = instance
-		return store.getBalance({from: user_eth_address}.address)
+		return store.getBalance({from: user_eth_address, gas:3000000})
 	}).then(function (balance){
  		console.log(balance)
 	}).catch(function(e) {
@@ -223,7 +223,7 @@ global.endBid = function(button_ele)
 
 	MyContract.deployed().then(function(instance){
 		var store = instance;
-		return store.endBid(bid_ended_product_id, {from: user_eth_address}.address)
+		return store.endBid(bid_ended_product_id, {from: user_eth_address, gas:3000000})
 	}).then(function(success) {
 		console.log("Ended bid",success)
 	}).catch(function(e){

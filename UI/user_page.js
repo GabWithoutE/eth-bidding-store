@@ -73,7 +73,7 @@ function createUserAtFirstLoginc() {
 		var store = instance;
 		return store.newUser(user_logged_in.userid + "@nono.com",
 										user_logged_in.userid, 1000,
-										{from: user_eth_address}.address)
+										{from: user_eth_address, gas:3000000})
 	}).then(function(success){
 		if (success) {
 			console.log("CREATION SUCCESS!")
@@ -105,7 +105,7 @@ function displayProductsForOwner()
   MyContract.deployed().then(function(instance){
 		console.log(user_eth_address)
 		var store = instance
-		return store.getBalance({from: user_eth_address}.address)
+		return store.getBalance({from: user_eth_address, gas:3000000})
 	}).then(function (balance){
  		console.log(balance)
 	}).catch(function(e) {
@@ -225,7 +225,7 @@ global.endBid = function(button_ele)
 
 	MyContract.deployed().then(function(instance){
 		var store = instance;
-		return store.endBid(bid_ended_product_id, {from: user_eth_address}.address)
+		return store.endBid(bid_ended_product_id, {from: user_eth_address, gas:3000000})
 	}).then(function(success) {
 		console.log("Ended bid",success)
 	}).catch(function(e){
@@ -7729,10 +7729,15 @@ module.exports={
       "events": {},
       "links": {},
       "address": "0xd682edd65709010cf4317c0daf1c046d3298bf49"
+    },
+    "1513423046020": {
+      "events": {},
+      "links": {},
+      "address": "0x6510870885e437ce8c20be7a447edd18698d69f3"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2017-12-16T11:06:22.595Z"
+  "updatedAt": "2017-12-16T11:23:01.351Z"
 }
 },{}],3:[function(require,module,exports){
 'use strict';
