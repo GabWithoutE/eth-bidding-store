@@ -126,28 +126,33 @@ function displayProductsForOwner()
 		var header_cell2 = header_row.insertCell(1);
 		header_cell2.innerHTML = "Product Description";
 
+		var header_cell3 = header_row.insertCell(2);
+		header_cell3.innerHTML = "Top Bid Price"
+
 		for(i=0;i<products.length;i++)
         	{
 
 			var row = tab.insertRow(i+1);
                 	var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
 			cell1.innerHTML = products[i].product_name;
 			cell2.innerHTML = products[i].product_desc;
+			cell3.innerHTML = products[i].top_bid_price;
 
 
-			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
 			if(products[i].isEnded=="true")
 			{
-				cell3.innerHTML = "Bid Ended!!!";
+				cell4.innerHTML = "Bid Ended!!!";
 			}
 			else
 			{
-				cell3.innerHTML = '<input type="button" onclick="endBid(this)" value="End Bid"></button>';
+				cell4.innerHTML = '<input type="button" onclick="endBid(this)" value="End Bid"></button>';
 			}
-			console.log(cell3.childNodes);
-			//cell3.childNodes[0].setAttribute("id",products[i].product_id);
-			cell3.id = products[i].product_id;
+			console.log(cell4.childNodes);
+			//cell4.childNodes[0].setAttribute("id",products[i].product_id);
+			cell4.id = products[i].product_id;
 
 		}
 	}
@@ -166,6 +171,7 @@ global.add_product =  function()
         newProduct.product_id = "00"+(products.length+1);
 	newProduct.product_name = productName;
 	newProduct.product_desc = prodDesc;
+	newProduct.top_bid_price = 0;
         newProduct.isEnded="false";
 	// console.log("HIIIII")
 
@@ -174,7 +180,7 @@ global.add_product =  function()
 	MyContract.deployed().then(function(instance){
 		var store = instance;
 		return store.newProduct(parseInt(newProduct.product_id),
-						newProduct.product_name, newProduct.product_desc, 10, {from: user_eth_address, gas:3000000})
+						newProduct.product_name, newProduct.product_desc, 0, {from: user_eth_address, gas:3000000})
 	}).then(function(success) {
 		console.log("Success?...",success)
 	}).catch(function(e){
@@ -190,11 +196,13 @@ global.add_product =  function()
 	var row = tab.insertRow(rowIndex );
         var cell1 = row.insertCell(0);
 	var cell2 = row.insertCell(1);
+	var cellPrice = row.insertCell(2);
 	cell1.innerHTML = newProduct.product_name;
 	cell2.innerHTML = newProduct.product_desc;
+	cellPrice.innerHTML = newProduct.top_bid_price;
 
 
-	var cell3 = row.insertCell(2);
+	var cell3 = row.insertCell(3);
 	cell3.innerHTML = '<input type="button" onclick="endBid(this)" value="End Bid"></button>';
 	console.log(cell3.childNodes);
 
@@ -260,6 +268,9 @@ function displayProductsForOthers()
 		var header_cell2 = header_row.insertCell(1);
 		header_cell2.innerHTML = "Product Description";
 
+		var header_cell3 = header_row.insertCell(2);
+		header_cell3.innerHTML = "Top Bid Price"
+
 		var rowIndex = 1;
 		for(i=0;i<products.length;i++)
         	{
@@ -269,15 +280,17 @@ function displayProductsForOthers()
 				var row = tab.insertRow(rowIndex);
                 		var cell1 = row.insertCell(0);
 				var cell2 = row.insertCell(1);
+				var cellPrice = row.insertCell(2);
 				cell1.innerHTML = products[i].product_name;
 				cell2.innerHTML = products[i].product_desc;
+				cellPrice.innerHTML = products[i].top_bid_price;
 
 
-				var cell3 = row.insertCell(2);
+				var cell3 = row.insertCell(3);
 				cell3.innerHTML = '<input type="text" placeholder="$bid_amount"></input>';
 				cell3.childNodes[0].setAttribute("id",products[i].product_id+"_bidamt");
 
-				var cell4 = row.insertCell(3);
+				var cell4 = row.insertCell(4);
 				cell4.innerHTML = '<input type="button" onclick="submitBid(this.id);" value="Submit Bid"></button>';
 				cell4.childNodes[0].setAttribute("id",products[i].product_id);
 
