@@ -1,6 +1,7 @@
 # Ethereum Contract Bidding Store
 Run in final-project directory
 ```
+$ npm install
 $ testrpc
 ```
 In another terminal window, run...
